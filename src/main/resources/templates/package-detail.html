@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Package Details</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #f2f2f9;
+    }
+
+    .package-card {
+      background: white;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(80vh - 100px);
+    }
+
+    .package-details h1 {
+      font-family: 'Cabin', sans-serif;
+      color: black;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+
+    table th, table td {
+      font-family: 'Cabin', sans-serif;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div id="page" layout:fragment="content">
+  <div class="container d-flex align-items-center mt-10 justify-content-center">
+    <div class="package-details">
+
+      <div class="package-card d-block p-5 mt-auto">
+        <div>
+          <h1 class="text-center block">Package Details</h1>
+        </div>
+
+        <table class="table table-bordered">
+          <tbody>
+          <tr>
+            <th>ID</th>
+            <td th:text="${package.id}"></td>
+          </tr>
+          <tr>
+            <th>Receiver Name</th>
+            <td th:text="${package.receiver_name}"></td>
+          </tr>
+          <tr>
+            <th>Phone Number</th>
+            <td th:text="${package.phone_number}"></td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td th:text="${package.address}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

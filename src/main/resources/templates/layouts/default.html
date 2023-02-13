@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div class="container">
+  <div class="d-flex flex-column min-vh-100" layout:fragment="content"></div>
+  <div class="bg-light py-3 mt-auto fixed-bottom" th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

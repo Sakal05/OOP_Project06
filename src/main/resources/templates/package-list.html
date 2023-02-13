@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Package List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="global.css">
+
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div id="page" layout:fragment="content">
+
+    <div class="container mt-3">
+        <h3>Package List</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Receiver Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Export Status</th>
+                <th></th>
+                <th>Method</th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="package : ${packages}">
+                <td th:text="${package.id}"></td>
+                <td th:text="${package.receiver_name}"></td>
+                <td th:text="${package.address}"></td>
+                <td th:text="${package.phone_number}"></td>
+
+<!--                <td><input type="checkbox" th:checked="${package.export_status}" disabled/></td>-->
+                <td style="text-align: center;">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" style="background-color: lightgray; color: blue;">
+                                <input type="checkbox" th:checked="${package.export_status}" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a th:href="@{'/package/package-detail?id=' + ${package.id}}">
+                        <button class="btn btn-warning">Detail</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'/package/edit?id=' + ${package.id}}">
+                        <button class="btn btn-warning">Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'/package/delete?id=' + ${package.id}}">
+                        <button class="btn btn-warning">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" disable="checkPreviousPage(event, ${currentPage}">
+                    <a class="page-link" th:href="@{'/package-list/page/' + ${currentPage-1}}" aria-label="Previous" onclick="return checkPreviousPage(event, ${currentPage});">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{'/package-list/page/' + ${currentPage+1}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <script>
+  function checkPreviousPage(event, currentPage) {
+    if (currentPage === 0) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
+</script>
+    </div>
+</div>
+
+</body>
+<div th:replace="fragments/footer :: footer"></div>
+</html>
